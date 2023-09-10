@@ -1,3 +1,5 @@
+package com.chess.engine.board;
+
 public abstract class Tile {
     int tileCoordinate;
 
