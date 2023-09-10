@@ -1,3 +1,4 @@
+package com.chess.engine.pieces;
 // Piece.java
 public abstract class Piece {
     private int x;
@@ -139,20 +140,14 @@ class Pawn extends Piece {
                 return true;
             } else if (dx == 0 && dy == -1) {
                 return true;
-            } else if (dx == 1 && dy == -1) {
-                return true;
-            }
+            } else return dx == 1 && dy == -1;
         } else {
             if (!hasMoved && dx == 0 && (dy == 1 || dy == 2)) {
                 hasMoved = true;
                 return true;
             } else if (dx == 0 && dy == 1) {
                 return true;
-            } else if (dx == 1 && dy == 1) {
-                return true;
-            }
+            } else return dx == 1 && dy == 1;
         }
-
-        return false;
     }
 }
