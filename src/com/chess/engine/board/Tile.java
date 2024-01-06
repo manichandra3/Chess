@@ -1,17 +1,38 @@
 package com.chess.engine.board;
-
 import com.chess.engine.pieces.Piece;
+import com.google.common.collect.ImmutableMap;
 
+import java.util.HashMap;
+import java.util.Map;
 public abstract class Tile {
-    int tileCoordinate;
+    protected final int tileCoordinate;//Immutable
+    private static final Map<Integer, EmptyTile> EMPTY_TILES_CACHE =  createAllPossibleEmptyTiles();
+    private static Map<Integer, EmptyTile> createAllPossibleEmptyTiles() {
 
-    Tile(int tileCoordinate) {
+        final Map<Integer, EmptyTile> emptyTileMap = new HashMap<>();
+        //creates all the possible empty tiles
+        //you get an empty tile by simply calling EmptyTiles.get(x);
+        for(int i = 0; i < 64; i++) {
+            emptyTileMap.put(i , new EmptyTile(i));
+        }
+
+        //could have used Collections.unmodifiableMap(emptyTileMap)
+        return ImmutableMap.copyOf(emptyTileMap);
+    }
+
+    public static Tile createTile(final int tileCoordinate, final Piece piece) {
+        return piece != null ? new OccupiedTile(tileCoordinate,piece) : EMPTY_TILES_CACHE.get(tileCoordinate);
+    }
+
+    //Private constructors for immutability.
+    private Tile(int tileCoordinate) {
+
         this.tileCoordinate = tileCoordinate;
     }
     public abstract boolean isOccupied();
     public abstract Piece getPiece();
     public static final class EmptyTile extends Tile {
-        EmptyTile(int coordinate) {
+        private EmptyTile(int coordinate) {
             super(coordinate);
         }
         @Override
@@ -25,10 +46,11 @@ public abstract class Tile {
         }
     }
     public static final class OccupiedTile extends Tile {
-        Piece pieceOnTile;
+        private final Piece pieceOnTile;
 
-        OccupiedTile(int tileCoordinate) {
+        private OccupiedTile(int tileCoordinate, Piece pieceOnTile) {
             super(tileCoordinate);
+            this.pieceOnTile = pieceOnTile;
         }
 
         @Override
