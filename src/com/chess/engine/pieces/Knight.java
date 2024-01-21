@@ -1,15 +1,27 @@
 package com.chess.engine.pieces;
-
+//  8 | 56 57 58 59 60 61 62 63
+//  7 | 48 49 ** 51 ** 53 54 55
+//  6 | 40 ** 42 43 44 ** 46 47
+//  5 | 32 33 34 Kn 36 37 38 39
+//  4 | 24 ** 26 27 28 ** 30 31
+//  3 | 16 17 ** 19 ** 21 22 23
+//  2 | 8  9  10 11 12 13 14 15
+//  1 | 0  1  2  3  4  5  6  7
+//     -----------------------
+//     a  b  c  d  e  f  g  h
+//     here kn = 35 and possible moves are {18, 20, 24, 29, 41, 45, 50, 52}
+//     hence the move offsets are {-17, -15, -11, -6, 6, 10, 15, 17}.
 import com.chess.engine.Alliance;
 import com.chess.engine.board.Board;
 import com.chess.engine.board.BoardUtils;
 import com.chess.engine.board.Move;
 import com.chess.engine.board.Tile;
 import com.google.common.collect.ImmutableList;
-
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
+
+import static com.chess.engine.board.Move.*;
 
 public class Knight extends Piece {
 
@@ -21,7 +33,7 @@ public class Knight extends Piece {
     }
 
     @Override
-    public Collection<Move> calculateLegalMove(Board board) {
+    public Collection<Move> calculateLegalMove(final Board board) {
         List<Move> legalMoves = new ArrayList<>();
 
         for (int currentCandidateOffset : CANDIDATE_MOVE_COORDINATES) {
@@ -41,14 +53,14 @@ public class Knight extends Piece {
 
                 // If the destination tile is not occupied
                 if (!candidateDestinationTile.isOccupied()) {
-                    legalMoves.add(new Move());
+                    legalMoves.add(new MajorMove(board, this, candidateDestinationCoordinate));
                 } else {
                     final Piece pieceAtDestination = candidateDestinationTile.getPiece();
                     final Alliance pieceAlliance = pieceAtDestination.getPieceAlliance();
 
                     // If the destination tile is occupied by an enemy piece
                     if (this.pieceAlliance != pieceAlliance) {
-                        legalMoves.add(new Move());
+                        legalMoves.add(new AttackMove(board, this, candidateDestinationCoordinate, pieceAtDestination));
                     }
                 }
             }
