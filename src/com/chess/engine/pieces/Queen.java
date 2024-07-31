@@ -35,7 +35,6 @@ public class Queen extends Piece {
                             isEighthColumnExclusion(candidateDestinationCoordinate,candidateDestinationCoordinateOffset)){
                         break;
                     }
-
                     // If the destination tile is not occupied
                     if (!candidateDestinationTile.isOccupied()) {
                         legalMoves.add(new Move.MajorMove(board, this, candidateDestinationCoordinate));

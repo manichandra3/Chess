@@ -28,8 +28,8 @@ public class Knight extends Piece {
     // Possible moves for a knight
     private final static int[] CANDIDATE_MOVE_COORDINATES = {-17, -15, -10, -6, 6, 10, 15, 17};
 
-    public Knight(int piecePosition, Alliance pieceAlliance) {
-        super(piecePosition, pieceAlliance);
+    public Knight(int piecePosition, Alliance pieceAlliance, final boolean isFirstMove) {
+        super(piecePosition, pieceAlliance, isFirstMove);
     }
 
     @Override
