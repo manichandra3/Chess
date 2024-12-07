@@ -13,8 +13,8 @@ import java.util.List;
 
 public class King extends Piece{
     private final int[] CANDIDATE_MOVE_VECTOR_COORDINATES= {-9, -8, -7, -1, 1, 7, 8, 9};
-    public King(int piecePosition, Alliance pieceAlliance, boolean isFirstMove) {
-        super(piecePosition, pieceAlliance, isFirstMove);
+    public King(int piecePosition, Alliance pieceAlliance) {
+        super(piecePosition, pieceAlliance);
     }
 
     @Override

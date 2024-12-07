@@ -28,8 +28,8 @@ import java.util.List;
 
 public class Pawn extends Piece{
     private final int[] CANDIDATE_MOVE_VECTOR_COORDINATES= {8, 16, 7, 9};
-    public Pawn(int piecePosition, final Alliance pieceAlliance, final boolean isFirstMove) {
-        super(piecePosition, pieceAlliance, isFirstMove);
+    public Pawn(int piecePosition, final Alliance pieceAlliance) {
+        super(piecePosition, pieceAlliance);
     }
 
     @Override

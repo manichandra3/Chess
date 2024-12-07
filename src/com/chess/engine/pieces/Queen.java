@@ -14,7 +14,7 @@ import java.util.List;
 public class Queen extends Piece {
 //   QUEEN's moves are a union of BISHOP and ROOK.
     private static final int[] CANDIDATE_MOVE_VECTOR_COORDINATES = { -9, -8, -7, -1, 1, 7, 8, 9 };
-    public Queen(int piecePosition, Alliance pieceAlliance) {
+    public Queen(int piecePosition, final Alliance pieceAlliance) {
         super(piecePosition, pieceAlliance);
     }
 
