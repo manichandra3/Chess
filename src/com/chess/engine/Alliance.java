@@ -1,26 +1,36 @@
 package com.chess.engine;
 
 public enum Alliance {
-    White {
+    White(1) {
         @Override
         public int getDirection() {
-            return 0;
+            return 1; // Moving up the board
         }
     },
-    Black {
+    Black(-1) {
         @Override
         public int getDirection() {
-            return 1;
+            return -1; // Moving down the board
         }
     };
+
+    private final int direction;
+
+    Alliance(int direction) {
+        this.direction = direction;
+    }
 
     public abstract int getDirection();
 
     public boolean isBlack() {
-        return this.equals(Black);
+        return this == Black;
     }
 
     public boolean isWhite() {
-        return this.equals(White);
+        return this == White;
+    }
+
+    public int getDirectionValue() {
+        return this.direction;
     }
 }
