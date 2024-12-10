@@ -1,4 +1,5 @@
 package com.chess.engine.board;
+import com.chess.engine.Alliance;
 import com.chess.engine.pieces.Piece;
 import com.google.common.collect.ImmutableMap;
 import java.util.HashMap;
@@ -38,6 +39,10 @@ public abstract class Tile {
             super(coordinate);
         }
         @Override
+        public String toString(){
+            return "_";
+        }
+        @Override
         public boolean isOccupied() {
             return false;
         }
@@ -54,7 +59,10 @@ public abstract class Tile {
             super(tileCoordinate);
             this.pieceOnTile = pieceOnTile;
         }
-
+        @Override
+        public String toString(){
+            return this.pieceOnTile.getPieceAlliance()== Alliance.Black ? this.pieceOnTile.toString().toLowerCase() : this.pieceOnTile.toString();
+        }
         @Override
         public boolean isOccupied() {
             return true;
